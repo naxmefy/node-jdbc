@@ -1,0 +1,62 @@
+{
+  "name": "@naxmefy/jdbc",
+  "version": "0.0.0",
+  "description": "use jdbc from node",
+  "author": {
+    "name": "MRW Neundorf",
+    "email": "m.neundorf@live.de",
+    "url": "http://www.nax.me"
+  },
+  "homepage": "https://github.com/naxmefy/node-jdbc",
+  "bugs": {
+    "email": "m.neundorf@live.de",
+    "url": "https://github.com/naxmefy/node-jdbc/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naxmefy/node-jdbc.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "tslint src",
+    "lint:fix": "npm run tslint -- --fix",
+    "prepublish": "npm run build",
+    "maven": "node-java-maven",
+    "pretest": "npm run maven",
+    "test": ""
+  },
+  "java": {
+    "dependencies": [
+      {
+        "groupId": "com.h2database",
+        "artifactId": "h2",
+        "version": "1.4.195"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.3",
+    "@types/java": "^0.7.31",
+    "@types/lodash": "^4.14.64",
+    "co-mocha": "^1.2.0",
+    "java": "^0.8.0",
+    "mocha": "^3.3.0",
+    "node-java-maven": "^0.0.12",
+    "nyc": "^10.3.2",
+    "should": "^11.2.1",
+    "ts-node": "^3.0.4",
+    "tslint": "^5.2.0",
+    "tslint-config-standard": "^5.0.2",
+    "typescript": "^2.3.2"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "lodash": "^4.17.4",
+    "synchronize": "^2.0.0"
+  },
+  "peerDependencies": {
+    "java": "^0.8.0",
+    "node-java-maven": "^0.0.12"
+  }
+}
