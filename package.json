@@ -25,7 +25,8 @@
     "prepublish": "npm run build",
     "maven": "node-java-maven",
     "pretest": "npm run maven",
-    "test": ""
+    "test": "mocha",
+    "test:coverage": "nyc _mocha"
   },
   "java": {
     "dependencies": [
@@ -35,6 +36,22 @@
         "version": "1.4.195"
       }
     ]
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text-summary"
+    ],
+    "sourceMap": true,
+    "instrument": true
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.3",

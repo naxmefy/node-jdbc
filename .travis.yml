@@ -1,0 +1,25 @@
+language: java
+sudo: required
+jdk:
+- oraclejdk8
+- oraclejdk7
+env:
+  global:
+    - NODE_VERSION=6 CC=clang CXX=clang++
+    - NODE_VERSION=7 CC=clang CXX=clang++
+cache:
+  directories:
+  - node_modules
+before_install:
+- nvm install $NODE_VERSION
+- node --version
+- python --version
+- npm install -g coveralls nyc
+script:
+- npm run test:coverage
+after_script:
+- nyc report --reporter=text-lcov | coveralls
+notifications:
+  email:
+    on_success: never
+    on_failure: change

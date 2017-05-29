@@ -23,9 +23,11 @@ export class Java {
   public mavenDependencies: {} = {}
 
   constructor (useXrs: boolean = true, useMaven: boolean = true) {
-    if (!instance) {
-      instance = this
+    if (instance) {
+      return instance
     }
+
+    instance = this
 
     this.java = java
     this.events = new EventEmitter()
