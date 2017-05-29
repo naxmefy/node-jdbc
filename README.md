@@ -2,6 +2,11 @@
 
 small wrapper to work with jdbc in node.
 
+[![npm version](https://badge.fury.io/js/%40naxmefy%2Fjdbc.svg)](https://badge.fury.io/js/%40naxmefy%2Fjdbc)
+
+[![Build Status](https://www.travis-ci.org/naxmefy/node-jdbc.svg?branch=master)](https://www.travis-ci.org/naxmefy/node-jdbc)
+[![Coverage Status](https://coveralls.io/repos/github/naxmefy/node-jdbc/badge.svg?branch=master)](https://coveralls.io/github/naxmefy/node-jdbc?branch=master)
+
 ## prerequisites
 
 **node-java**
