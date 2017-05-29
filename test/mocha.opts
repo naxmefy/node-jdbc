@@ -1,0 +1,5 @@
+--recursive
+--colors
+--compilers ts:ts-node/register
+--require should
+--require test/spec_helper

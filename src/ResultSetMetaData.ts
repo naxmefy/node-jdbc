@@ -1,35 +1,22 @@
-import { Holdabilities } from './Holdabilities';
-import { Types } from './Types';
-
-/**
- * IColumnCount for array of meta columns in jdbc.
- * array index begins always with 1 instead of 0
- */
-export type IColumnCount = number
+import {Holdabilities} from './Holdabilities'
+import {Types} from './Types'
 
 export interface IResultSetMetaData {
-  getColumnCountSync(): IColumnCount
-  getColumnNameSync(columnIndex: IColumnIndex): IColumnName
-  getColumnLabelSync(columnIndex: IColumnIndex): IColumnLabel
-  getColumnTypeSync(columnIndex: IColumnIndex): IColumnTypeIndex
+  getColumnCountSync (): number
+  getColumnNameSync (columnIndex: number): string
+  getColumnLabelSync (columnIndex: number): string
+  getColumnTypeSync (columnIndex: number): number
 }
-
-export type IColumnTypeIndex = number
-
-export type IColumnIndex = number
-export type IColumnName = string
-export type IColumnLabel = string
-export type IColumnTypeName = string
 
 export type IColumnType = {
   index: number,
-  name: IColumnTypeName
+  name: string
 }
 
 export type IColumnMetaData = {
-  columnIndex: IColumnIndex,
-  name: IColumnName,
-  label: IColumnLabel,
+  columnIndex: number,
+  name: string,
+  label: string,
   type: IColumnType
 }
 
@@ -37,24 +24,24 @@ export class ResultSetMetaData {
   private types: string[]
   private holdabilities: string[]
 
-  constructor(private resultSetMetaData: IResultSetMetaData) {
+  constructor (private resultSetMetaData: IResultSetMetaData) {
     this.types = Types()
     this.holdabilities = Holdabilities()
   }
 
-  getColumnCount(): IColumnCount {
+  getColumnCount (): number {
     return this.resultSetMetaData.getColumnCountSync()
   }
 
-  getColumnName(columnIndex: IColumnIndex): IColumnName {
+  getColumnName (columnIndex: number): string {
     return this.resultSetMetaData.getColumnNameSync(columnIndex)
   }
 
-  getColumnLabel(columnIndex: IColumnIndex): IColumnLabel {
+  getColumnLabel (columnIndex: number): string {
     return this.resultSetMetaData.getColumnLabelSync(columnIndex)
   }
 
-  getColumnType(columnIndex: IColumnIndex): IColumnType {
+  getColumnType (columnIndex: number): IColumnType {
     const typeIndex = this.resultSetMetaData.getColumnTypeSync(columnIndex)
     return {
       index: typeIndex,
@@ -62,14 +49,14 @@ export class ResultSetMetaData {
     }
   }
 
-  getTypeName(typeIndex: IColumnTypeIndex): IColumnTypeName {
+  getTypeName (typeIndex: number): string {
     return this.types[typeIndex] || 'String'
   }
 
-  getAllColumnMeta(): IColumnMetaData[] {
+  getAllColumnMeta (): IColumnMetaData[] {
     const columns: IColumnMetaData[] = []
     const columnCount = this.getColumnCount()
-    for(let i = 1; i <= columnCount; i++) {
+    for (let i = 1; i <= columnCount; i++) {
       columns.push({
         columnIndex: i,
         name: this.getColumnName(i),

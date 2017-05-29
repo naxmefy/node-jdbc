@@ -1,23 +1,23 @@
 import * as Promise from 'bluebird'
 import * as _ from 'lodash'
-import { ResultSetMetaData, IResultSetMetaData, IColumnMetaData, IColumnLabel } from './ResultSetMetaData';
+import {IColumnMetaData, IResultSetMetaData, ResultSetMetaData} from './ResultSetMetaData'
 
 export interface IResultSet {
-  nextSync(): IResultSet
-  getMetaDataSync(): IResultSetMetaData
+  nextSync (): IResultSet
+  getMetaDataSync (): IResultSetMetaData
 
-  getBooleanSync(columnLabel: IColumnLabel): any
-  getBytesSync(columnLabel: IColumnLabel): any
-  getStringSync(columnLabel: IColumnLabel): any
-  getShortSync(columnLabel: IColumnLabel): any
-  getIntSync(columnLabel: IColumnLabel): any
-  getFloatSync(columnLabel: IColumnLabel): any
-  getDoubleSync(columnLabel: IColumnLabel): any
-  getBigDecimalSync(columnLabel: IColumnLabel): any
-  getDateSync(columnLabel: IColumnLabel): any
-  getTimeSync(columnLabel: IColumnLabel): any
-  getTimestampSync(columnLabel: IColumnLabel): any
-  getObjectSync(columnLabel: IColumnLabel): any
+  getBooleanSync (columnLabel: string): any
+  getBytesSync (columnLabel: string): any
+  getStringSync (columnLabel: string): any
+  getShortSync (columnLabel: string): any
+  getIntSync (columnLabel: string): any
+  getFloatSync (columnLabel: string): any
+  getDoubleSync (columnLabel: string): any
+  getBigDecimalSync (columnLabel: string): any
+  getDateSync (columnLabel: string): any
+  getTimeSync (columnLabel: string): any
+  getTimestampSync (columnLabel: string): any
+  getObjectSync (columnLabel: string): any
 }
 
 export type IFetchResult = {}
@@ -25,19 +25,19 @@ export type IFetchResult = {}
 export class ResultSet {
   private resultSet: IResultSet
 
-  constructor(resultSet: IResultSet) {
-    this.resultSet = <IResultSet>Promise.promisifyAll(resultSet)
+  constructor (resultSet: IResultSet) {
+    this.resultSet = Promise.promisifyAll(resultSet) as IResultSet
   }
 
-  next() {
+  next () {
     return this.resultSet.nextSync()
   }
 
-  getMetaData(): ResultSetMetaData {
+  getMetaData (): ResultSetMetaData {
     return new ResultSetMetaData(this.resultSet.getMetaDataSync())
   }
 
-  fetchResult(): IFetchResult {
+  fetchResult (): IFetchResult {
     const metas: IColumnMetaData[] = this.getMetaData().getAllColumnMeta()
     const result: IFetchResult = {}
 
@@ -65,9 +65,9 @@ export class ResultSet {
     return result
   }
 
-  fetchAllResults(): IFetchResult[] {
+  fetchAllResults (): IFetchResult[] {
     const results: IFetchResult[] = []
-    while(this.next()) {
+    while (this.next()) {
       results.push(this.fetchResult())
     }
     return results

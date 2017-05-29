@@ -1,17 +1,17 @@
 import * as Promise from 'bluebird'
 import * as j from 'java'
 import * as mvn from 'node-java-maven'
-import * as sync from 'synchronize'
+import * as deasync from 'deasync'
 
-import { EventEmitter } from 'events'
+import {EventEmitter} from 'events'
 
 declare module 'java' {
   export interface NodeAPI {
-    callStaticMethodAsync(className: string, methodName: string, ...args: any[]): Promise<any>
+    callStaticMethodAsync (className: string, methodName: string, ...args: any[]): Promise<any>
   }
 }
 
-const java: j.NodeAPI = <j.NodeAPI>Promise.promisifyAll(j)
+const java: j.NodeAPI = Promise.promisifyAll(j) as j.NodeAPI
 
 let instance: Java = null
 
@@ -19,7 +19,10 @@ export class Java {
   public java: j.NodeAPI
   public events: EventEmitter
 
-  constructor(useXrs: boolean = true, useMaven: boolean = true) {
+  public mavenClasspath: string[] = []
+  public mavenDependencies: {} = {}
+
+  constructor (useXrs: boolean = true, useMaven: boolean = true) {
     if (!instance) {
       instance = this
     }
@@ -33,8 +36,15 @@ export class Java {
 
     if (useMaven) {
       try {
-        const mvnDependencies: string[] = sync.await(mvn(sync.defer()))
-        this.addClasspath(mvnDependencies)
+        let done: boolean = false
+        mvn((err: Error, deps) => {
+          if (err) throw err
+          this.mavenClasspath = deps.classpath
+          this.mavenDependencies = deps.dependencies
+          done = true
+        })
+        deasync.loopWhile(() => !done)
+        this.addClasspath(this.mavenClasspath)
       } catch (err) {
         throw err
       }
@@ -43,11 +53,18 @@ export class Java {
     return instance
   }
 
-  isJvmCreated(): boolean {
+  static getInstance (): Java {
+    if (!instance) {
+      instance = new Java()
+    }
+    return instance
+  }
+
+  isJvmCreated (): boolean {
     return this.java.isJvmCreated()
   }
 
-  addOption(option: string) {
+  addOption (option: string) {
     if (this.isJvmCreated() === false) {
       this.java.options.push(option)
     } else {
@@ -55,15 +72,11 @@ export class Java {
     }
   }
 
-  addClasspath(dependencies: string[]) {
+  addClasspath (dependencies: string[]) {
     if (this.isJvmCreated() === false) {
       this.java.classpath.push.apply(this.java.classpath, dependencies)
     } else {
       throw new Error(`Can not add classpath dependencies, because JVM instance is already created.\n\nDependencies: ${dependencies}`)
     }
-  }
-
-  static getInstance(): Java {
-    return instance
   }
 }
