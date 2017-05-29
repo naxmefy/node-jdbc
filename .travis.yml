@@ -5,8 +5,11 @@ jdk:
 - oraclejdk7
 env:
   global:
-    - NODE_VERSION=6 CC=clang CXX=clang++
-    - NODE_VERSION=7 CC=clang CXX=clang++
+    - CC=clang
+    - CXX=clang++
+  env:
+    - NODE_VERSION=6
+    - NODE_VERSION=7
 cache:
   directories:
   - node_modules
