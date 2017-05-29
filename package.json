@@ -2,6 +2,7 @@
   "name": "@naxmefy/jdbc",
   "version": "0.0.0",
   "description": "use jdbc from node",
+  "main": "lib/index.js",
   "author": {
     "name": "MRW Neundorf",
     "email": "m.neundorf@live.de",
