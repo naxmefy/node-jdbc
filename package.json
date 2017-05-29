@@ -1,6 +1,6 @@
 {
   "name": "@naxmefy/jdbc",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "use jdbc from node",
   "main": "lib/index.js",
   "author": {
