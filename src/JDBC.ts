@@ -40,7 +40,7 @@ export class JDBC {
     })
   }
 
-  createStatement (connectIfClosed): Promise<Statement> {
+  createStatement (connectIfClosed?: boolean): Promise<Statement> {
     return this.getConnection(connectIfClosed)
       .then((connection: Connection) => connection.createStatement())
   }
