@@ -90,7 +90,7 @@ myDatabase.createStatement()
 
 **or with typescript (types included)**
 ```typescript
-import {JDBC} from '@naxmefy/jdbc'
+import {JDBC, ResultSet, Statement} from '@naxmefy/jdbc'
 const myDatabase = new JDBC({
   className: 'any.jdbc.Driver',
   url: 'jdbc:to:any.db',
@@ -99,10 +99,10 @@ const myDatabase = new JDBC({
 })
 
 myDatabase.createStatement()
-  .then(statement => {
+  .then((statement: Statement) => {
     return statement.executeQuery('SELECT * FROM FOO')
   })
-  .then(resultSet => {
+  .then((resultSet: ResultSet) => {
       const arrayOfResults = resultSet.fetchAllResults()
       arrayOfResults.forEach(result => {
           console.log(result)
