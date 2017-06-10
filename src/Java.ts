@@ -1,7 +1,7 @@
 import * as Promise from 'bluebird'
 import * as j from 'java'
-import * as mvn from 'node-java-maven'
 import * as deasync from 'deasync'
+import * as debug from 'debug'
 
 import {EventEmitter} from 'events'
 
@@ -21,6 +21,8 @@ export class Java {
 
   public mavenClasspath: string[] = []
   public mavenDependencies: {} = {}
+  
+  protected _debug: debug.IDebugger = debug('jdbc:Java')
 
   constructor (useXrs: boolean = true, useMaven: boolean = true) {
     if (instance) {
@@ -33,12 +35,14 @@ export class Java {
     this.events = new EventEmitter()
 
     if (useXrs) {
+      this._debug('use Xrs')
       this.addOption('-Xrs')
     }
 
     if (useMaven) {
       try {
         let done: boolean = false
+        const mvn = require('node-java-maven')
         mvn((err: Error, deps) => {
           if (err) throw err
           this.mavenClasspath = deps.classpath
@@ -48,7 +52,11 @@ export class Java {
         deasync.loopWhile(() => !done)
         this.addClasspath(this.mavenClasspath)
       } catch (err) {
-        throw err
+        if (err.code !== 'MODULE_NOT_FOUND') {
+          throw err 
+        } else {
+          this._debug('node-jave-maven not found. useMaven is ignored.')
+        }
       }
     }
 
