@@ -27,7 +27,7 @@ $ npm install --save java
 > or
 > [https://github.com/naxmefy/docker-node-java](https://github.com/naxmefy/docker-node-java)
 
-**node-java-maven**
+**OPTIONAL: node-java-maven**
 
 ```bash
 $ npm install --save node-java-maven
