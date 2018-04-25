@@ -26,7 +26,7 @@ export class ResultSet {
   private resultSet: IResultSet
 
   constructor (resultSet: IResultSet) {
-    this.resultSet = Promise.promisifyAll(resultSet) as IResultSet
+    this.resultSet = resultSet as IResultSet
   }
 
   next () {
@@ -44,7 +44,7 @@ export class ResultSet {
     for (let i = 0; i < metas.length; i++) {
       const meta: IColumnMetaData = metas[i]
       const getterName = 'get' + meta.type.name + 'Sync'
-      if (_.has(this.resultSet, getterName) === false) {
+      if (typeof this.resultSet[getterName] !== 'function') {
         throw new Error(`Unknown type getter (${getterName}) for ${meta.type.name} for column ${meta.name} (${meta.label})`)
       }
 
