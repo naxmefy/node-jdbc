@@ -6,6 +6,7 @@ import {Java} from './Java'
 export interface IPreparedStatement {
   setStringSync (index: number, value: string): void
   setIntSync (index: number, value: number): void
+  setLongSync (index: number, value: number): void
   setTimestampSync (index: number, timestamp: string): void
   setDateSync (index: number, date: string): void
   executeUpdateAsync (): Promise<number>
@@ -31,6 +32,12 @@ export class PreparedStatement {
 
   setInt (index: number, value: number): void {
     return this.preparedStatement.setIntSync(index, value)
+  }
+
+  setLong (index: number, value: string): void {
+    const longValue = value ? Java.getInstance()
+      .java.newInstanceSync('java.lang.Long', value) : 0
+    return this.preparedStatement.setLongSync(index, longValue)
   }
 
   setTimestamp (index: number, value: string): void {
