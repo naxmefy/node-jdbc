@@ -2,7 +2,11 @@ language: java
 sudo: required
 dist: trusty
 jdk:
-- oraclejdk8
+  - oraclejdk8
+  - openjdk8
+  - openjdk9
+  - openjdk10
+  - openjdk11
 env:
   global:
     - CC=clang
@@ -13,6 +17,7 @@ env:
     - NODE_VERSION=8
     - NODE_VERSION=9
     - NODE_VERSION=10
+    - NODE_VERSION=11
     - NODE_VERSION=12
 cache:
   directories:
