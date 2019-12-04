@@ -1,5 +1,5 @@
 import * as Promise from 'bluebird'
-import {IResultSet, ResultSet} from './ResultSet'
+import { IResultSet, ResultSet } from './ResultSet'
 
 export interface IStatement {
   executeUpdate (sql: string): number

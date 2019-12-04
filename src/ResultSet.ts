@@ -1,6 +1,6 @@
 import * as Promise from 'bluebird'
 import * as _ from 'lodash'
-import {IColumnMetaData, IResultSetMetaData, ResultSetMetaData} from './ResultSetMetaData'
+import { IColumnMetaData, IResultSetMetaData, ResultSetMetaData } from './ResultSetMetaData'
 
 export interface IResultSet {
   nextSync (): IResultSet

@@ -1,7 +1,7 @@
 import * as Promise from 'bluebird'
 
-import {IResultSet, ResultSet} from './ResultSet'
-import {Java} from './Java'
+import { IResultSet, ResultSet } from './ResultSet'
+import { Java } from './Java'
 
 export interface IPreparedStatement {
   setStringSync (index: number, value: string): void

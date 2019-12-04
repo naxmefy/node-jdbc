@@ -1,10 +1,10 @@
 import * as debug from 'debug'
 import * as Promise from 'bluebird'
 
-import {isEmpty} from 'lodash'
-import {Connection, IConnection} from './Connection'
-import {Java} from './Java'
-import {Statement} from './Statement'
+import { isEmpty } from 'lodash'
+import { Connection, IConnection } from './Connection'
+import { Java } from './Java'
+import { Statement } from './Statement'
 
 export interface IJDBCConfig {
   className: string

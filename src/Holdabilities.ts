@@ -1,6 +1,6 @@
 import { Java } from './Java'
 
-export function Holdabilities() {
+export function Holdabilities () {
   const java = Java.getInstance().java
   const holdability: string[] = []
 

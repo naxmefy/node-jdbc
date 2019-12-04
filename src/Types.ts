@@ -1,4 +1,4 @@
-import {Java} from './Java'
+import { Java } from './Java'
 
 export function Types () {
   const java = Java.getInstance().java

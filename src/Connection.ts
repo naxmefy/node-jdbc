@@ -1,8 +1,8 @@
 import * as Promise from 'bluebird'
 
-import {IStatement, Statement} from './Statement'
-import {IPreparedStatement, PreparedStatement} from './PreparedStatement'
-import {CallableStatement, ICallableStatement} from './CallableStatement'
+import { IStatement, Statement } from './Statement'
+import { IPreparedStatement, PreparedStatement } from './PreparedStatement'
+import { CallableStatement, ICallableStatement } from './CallableStatement'
 
 export interface IConnection {
   setAutoCommitSync (autoCommit: boolean): void

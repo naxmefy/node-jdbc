@@ -1,7 +1,7 @@
 import * as Promise from 'bluebird'
 
-import {Java} from './Java'
-import {IPreparedStatement, PreparedStatement} from './PreparedStatement'
+import { Java } from './Java'
+import { IPreparedStatement, PreparedStatement } from './PreparedStatement'
 
 export interface ICallableStatement extends IPreparedStatement {
   registerOutParameterSync (index: number, type: string): void
