@@ -1,0 +1,21 @@
+name: Check
+
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ["6", "7", "8", "9", "10", "11", "12", "13"]
+    name: Check on ${{ matrix.node }}
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - run: npm install
+        env:
+          CC: clang
+          CXX: clang++
+      - run: npm test
