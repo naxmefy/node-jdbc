@@ -3,7 +3,7 @@ import * as j from 'java'
 import * as deasync from 'deasync'
 import * as debug from 'debug'
 
-import {EventEmitter} from 'events'
+import { EventEmitter } from 'events'
 
 declare module 'java' {
   export interface NodeAPI {
@@ -21,7 +21,7 @@ export class Java {
 
   public mavenClasspath: string[] = []
   public mavenDependencies: {} = {}
-  
+
   protected _debug: debug.IDebugger = debug('jdbc:Java')
 
   constructor (useXrs: boolean = true, useMaven: boolean = true) {
@@ -53,7 +53,7 @@ export class Java {
         this.addClasspath(this.mavenClasspath)
       } catch (err) {
         if (err.code !== 'MODULE_NOT_FOUND') {
-          throw err 
+          throw err
         } else {
           this._debug('node-jave-maven not found. useMaven is ignored.')
         }

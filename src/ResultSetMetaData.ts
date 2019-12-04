@@ -1,5 +1,5 @@
-import {Holdabilities} from './Holdabilities'
-import {Types} from './Types'
+import { Holdabilities } from './Holdabilities'
+import { Types } from './Types'
 
 export interface IResultSetMetaData {
   getColumnCountSync (): number
