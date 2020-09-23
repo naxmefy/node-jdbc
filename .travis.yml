@@ -19,20 +19,21 @@ env:
     - NODE_VERSION=10
     - NODE_VERSION=11
     - NODE_VERSION=12
+    - NODE_VERSION=14
 cache:
   directories:
-  - node_modules
+    - node_modules
 before_install:
-- nvm install $NODE_VERSION
-- node --version
-- python --version
+  - nvm install $NODE_VERSION
+  - node --version
+  - python --version
 install:
-- npm install
-- npm install -g coveralls nyc
+  - npm install
+  - npm install -g coveralls nyc
 script:
-- npm run test:coverage
+  - npm run test:coverage
 after_success:
-- nyc report --reporter=text-lcov | coveralls
+  - nyc report --reporter=text-lcov | coveralls
 notifications:
   email:
     on_success: never
