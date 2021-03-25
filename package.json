@@ -19,11 +19,14 @@
     "type": "git",
     "url": "git+https://github.com/naxmefy/node-jdbc.git"
   },
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "build": "tsc",
     "lint": "tslint --project .",
     "lint:fix": "npm run lint -- --fix",
-    "postinstall": "npm run build",
+    "prepublish": "npm run build",
     "maven": "node-java-maven",
     "pretest": "npm run maven",
     "test": "mocha",
