@@ -55,6 +55,11 @@
     "instrument": true
   },
   "devDependencies": {
+    "@types/bluebird": "^3.5.3",
+    "@types/debug": "0.0.29",
+    "@types/java": "^0.7.31",
+    "@types/lodash": "^4.14.64",
+    "@types/node": "^7.0.29",
     "@types/mocha": "^2.2.41",
     "@types/should": "^8.3.0",
     "co-mocha": "^1.2.0",
@@ -69,11 +74,6 @@
     "typescript": "^3.7.3"
   },
   "dependencies": {
-    "@types/bluebird": "^3.5.3",
-    "@types/debug": "0.0.29",
-    "@types/java": "^0.7.31",
-    "@types/lodash": "^4.14.64",
-    "@types/node": "^7.0.29",
     "bluebird": "^3.5.0",
     "deasync": "^0.1.9",
     "debug": "^2.6.8",
