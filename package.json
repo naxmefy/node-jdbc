@@ -67,7 +67,7 @@
     "@types/should": "^8.3.0",
     "co-mocha": "^1.2.0",
     "java": "^0.12.1",
-    "mocha": "^6.2.2",
+    "mocha": "^10.2.0",
     "node-java-maven": "^0.1.2",
     "nyc": "^14.1.1",
     "should": "^11.2.1",
